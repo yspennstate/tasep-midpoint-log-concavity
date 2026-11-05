@@ -1,0 +1,80 @@
+{
+ "array_inequality": [
+  {
+   "n": 2,
+   "cap": 6,
+   "arrays": 84,
+   "pairs": 3570
+  },
+  {
+   "n": 3,
+   "cap": 3,
+   "arrays": 112,
+   "pairs": 6328
+  },
+  {
+   "n": 4,
+   "cap": 2,
+   "arrays": 126,
+   "pairs": 8001
+  }
+ ],
+ "representation": [
+  {
+   "n": 2,
+   "t": 2,
+   "states": 66,
+   "max_relative_difference": 3.777335013707178e-61
+  },
+  {
+   "n": 3,
+   "t": 0.5,
+   "states": 84,
+   "max_relative_difference": 2.007709197516512e-60
+  }
+ ],
+ "theorem_on_box": [
+  {
+   "n": 2,
+   "t": 0.5,
+   "states": 66,
+   "pairs": 1980,
+   "smallest_ratio": 1.0099684362766097
+  },
+  {
+   "n": 2,
+   "t": 1,
+   "states": 66,
+   "pairs": 1980,
+   "smallest_ratio": 1.0098252345379495
+  },
+  {
+   "n": 2,
+   "t": 2,
+   "states": 66,
+   "pairs": 1980,
+   "smallest_ratio": 1.009503461199818
+  },
+  {
+   "n": 3,
+   "t": 0.5,
+   "states": 84,
+   "pairs": 3115,
+   "smallest_ratio": 1.0190465088426526
+  },
+  {
+   "n": 3,
+   "t": 1,
+   "states": 84,
+   "pairs": 3115,
+   "smallest_ratio": 1.017338283528228
+  },
+  {
+   "n": 3,
+   "t": 2,
+   "states": 84,
+   "pairs": 3115,
+   "smallest_ratio": 1.0116443582302326
+  }
+ ]
+}

@@ -1,0 +1,253 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,amsmath,amssymb,amsthm,mathtools,enumitem}
+\usepackage[margin=1.1in]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{xurl}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\fl}[1]{\left\lfloor #1\right\rfloor}
+\newcommand{\cl}[1]{\left\lceil #1\right\rceil}
+
+\hypersetup{pdftitle={Log-concavity of the step TASEP distribution at rounded midpoints},pdfauthor={Yitzchak Shmalo}}
+
+\title{Log-concavity of the step TASEP distribution at rounded midpoints}
+\author{Yitzchak Shmalo}
+\address{Einstein Institute of Mathematics, The Hebrew University of Jerusalem, Jerusalem, Israel}
+\email{yitzchak.shmalo@gmail.com}
+\date{5 November 2026}
+\subjclass[2020]{60K35, 05E05, 26D15}
+\keywords{totally asymmetric simple exclusion process, step initial condition, log-concavity, Gelfand--Tsetlin patterns, Schur process, discrete Brunn--Minkowski inequality}
+
+\begin{document}
+\begin{abstract}
+Let $X(t)=(X_1(t),\dots,X_n(t))$ be the positions at time $t$ of $n$ particles of the continuous-time totally asymmetric simple exclusion process started from the step configuration $X_i(0)=-i$, and let $p_t(x)=\Pp(X(t)=x)$ for $x\in\Z^n$. We prove that
+\[
+p_t(a)\,p_t(b)\le p_t\bigl(\fl{\tfrac{a+b}2}\bigr)\,p_t\bigl(\cl{\tfrac{a+b}2}\bigr)
+\]
+for all $n$, all $t\ge0$ and all $a,b\in\Z^n$, with rounding taken coordinatewise. In particular $p_t(a)p_t(b)\le p_t(\tfrac{a+b}2)^2$ whenever $a+b\in2\Z^n$, which answers a question from the open problem list of the 2025 AIM workshop on KPZ universality. The proof realizes $X(t)$ as a coordinate subvector of the Borodin--Ferrari interlacing array, whose fixed-time law has the explicit weight $e^{-nt}t^{|\lambda|}\prod_{i<j}(l_i-l_j)/\prod_i l_i!$ depending only on the top row. This weight satisfies the rounded-midpoint inequality factor by factor, and the discrete four-functions theorem of Halikias, Klartag and Slomka carries the inequality from the array to any coordinate marginal. The same argument shows that the position of each single particle has a log-concave law.
+\end{abstract}
+\maketitle
+
+\section{Introduction}\label{sec:intro}
+
+In the continuous-time totally asymmetric simple exclusion process (TASEP) on $\Z$, each particle carries an exponential clock of rate one and, when the clock rings, jumps one step to the right if that site is empty. With the step initial condition the particles start at $-1,-2,-3,\dots$. Since a particle is affected only by the particles to its right, the first $n$ particles evolve as the $n$-particle TASEP with $X_i(0)=-i$, indexed from right to left. Write
+\[
+p_t(x)=\Pp\bigl(X_1(t)=x_1,\dots,X_n(t)=x_n\bigr),\qquad x\in\Z^n,
+\]
+extended by zero off the state space $\{x_1>x_2>\dots>x_n\}$. Sch\"utz \cite{Sch} gave $p_t$ as an $n\times n$ determinant.
+
+The open problem list of the AIM workshop \emph{All roads to KPZ universality} \cite{AIM} recalls that a function is log-concave if $f(a)f(b)\le f(\frac{a+b}2)^2$, where the arguments may be vectors, and asks whether the transition probability $f(a)$ of continuous-time TASEP with step initial condition is log-concave. The list notes that it is unclear how to establish this, and that the motivation includes connections to symmetric functions; related results are the log-concavity of the Tracy--Widom density \cite{BLS} and of the top row of a Young diagram under Poissonized Plancherel measure \cite{BKM}, and the log-concavity of Schur polynomials \cite{HMMS}. Here $f=p_t$ is a function on $\Z^n$, so the midpoint condition refers to $a,b$ with $\frac{a+b}2\in\Z^n$. We prove a stronger lattice statement in which the midpoint is rounded down and up.
+
+\begin{theorem}\label{thm:main}
+For every $n\ge1$, every $t\ge0$ and all $a,b\in\Z^n$,
+\begin{equation}\label{eq:main}
+p_t(a)\,p_t(b)\le p_t\Bigl(\fl{\frac{a+b}2}\Bigr)\,p_t\Bigl(\cl{\frac{a+b}2}\Bigr),
+\end{equation}
+where $\fl{\cdot}$ and $\cl{\cdot}$ act coordinatewise. In particular $p_t(a)p_t(b)\le p_t(\frac{a+b}2)^2$ whenever $a+b\in2\Z^n$.
+\end{theorem}
+
+\begin{corollary}\label{cor:coord}
+For every $t\ge0$ and every set $K\subseteq\{1,\dots,n\}$ of particle labels, the law of $(X_k(t))_{k\in K}$ satisfies \eqref{eq:main} on $\Z^K$. In particular the law of the position $X_k(t)$ of a single particle is a log-concave sequence: $\Pp(X_k(t)=j)^2\ge\Pp(X_k(t)=j-1)\Pp(X_k(t)=j+1)$ for all $j$.
+\end{corollary}
+
+The rate one is no restriction, since a common rate $\gamma$ only changes $t$ to $\gamma t$. The statement concerns each finite $n$, hence the joint law of the rightmost $n$ particles of the step TASEP for every $n$; we make no claim about real-variable extensions of $p_t$ or about other initial conditions.
+
+The proof has three steps. Borodin and Ferrari \cite{BF} constructed a Markov dynamics on interlacing arrays, the push-block dynamics, whose left edge is exactly the step TASEP; it is a dynamical version of the Schur process \cite{OR}. In Section~\ref{sec:array} we write its fixed-time law explicitly: after a change of coordinates the array is a Gelfand--Tsetlin pattern $\Lambda$ with top row $\lambda$, and
+\begin{equation}\label{eq:W}
+W_t(\Lambda)=e^{-nt}\,t^{|\lambda|}\,\frac{\prod_{i<j}(l_i-l_j)}{\prod_{i=1}^n l_i!},\qquad l_i=\lambda_i+n-i.
+\end{equation}
+The vector $D=(X_i(t)+i)_{i\le n}$ is a coordinate subvector of $\Lambda$, not a function of the top row. In Section~\ref{sec:midpoint} we show that $W_t$ satisfies the rounded-midpoint inequality on the lattice of arrays: the support is preserved because every constraint is a comparison between two coordinates, each reciprocal factorial improves because $r!s!\le a!b!$ for balanced $r,s$, and each Vandermonde factor improves because a balanced pair of integers with a given sum has the largest product. In Section~\ref{sec:proof} the discrete four-functions theorem of Halikias, Klartag and Slomka \cite{HKS} passes the inequality to coordinate marginals, which proves Theorem~\ref{thm:main} and Corollary~\ref{cor:coord}.
+
+\section{The interlacing array and its law}\label{sec:array}
+
+\subsection{The push-block dynamics}
+We use the dynamics of \cite[Section~1.1]{BF} with all rates equal to one. The state is an array $(z^m_k)_{1\le k\le m\le n}$ of integers with
+\begin{equation}\label{eq:zinter}
+z^{m+1}_k<z^m_k\le z^{m+1}_{k+1},
+\end{equation}
+started from $z^m_k(0)=k-m-1$. Each coordinate has an independent rate-one clock. When the clock of $z^m_k$ rings, the coordinate moves one step to the right unless it is blocked, $z^m_k=z^{m-1}_k-1$; if it moves, it pushes the coordinates of the higher levels that would otherwise violate \eqref{eq:zinter} one step to the right as well.
+
+\begin{lemma}\label{lem:edge}
+The left edge $(z^1_1,z^2_1,\dots,z^n_1)$ is the $n$-particle TASEP with $X_m(0)=-m$.
+\end{lemma}
+
+\begin{proof}
+This is stated in \cite[Section~1.1]{BF}; we check it from the description. Initially $z^m_1=-m$. A push moves $z^{m+1}_{k+1}$ after a move of $z^m_k$, so it never acts on a coordinate with lower index $1$. Thus $z^m_1$ moves only by its own clock, at rate one, and it is blocked exactly when $z^m_1=z^{m-1}_1-1$, that is, when the site to its right is occupied by the particle with label $m-1$. This is the TASEP generator, and a chain with bounded rates is determined by its generator and initial state.
+\end{proof}
+
+Put $\lambda^m_i=z^m_{m-i+1}+i$ for $1\le i\le m\le n$. Substituting $k=m-i+1$ in \eqref{eq:zinter} gives $\lambda^{m+1}_{i+1}-1<\lambda^m_i\le\lambda^{m+1}_i$, and by integrality
+\begin{equation}\label{eq:GT}
+\lambda^{m+1}_i\ge\lambda^m_i\ge\lambda^{m+1}_{i+1}.
+\end{equation}
+Initially every $\lambda^m_i$ is zero, and coordinates only increase, so $\lambda^m_i\ge0$. Thus $\Lambda=(\lambda^1,\dots,\lambda^n)$ is a Gelfand--Tsetlin pattern of nonnegative integers with top row $\lambda=\lambda^n$, and
+\[
+D_m:=X_m(t)+m=\lambda^m_m,\qquad 1\le m\le n,
+\]
+is the diagonal of the pattern. We regard $\Lambda$ as a point of $\Z^N$, $N=n(n+1)/2$, and write $\mathcal G_n\subset\Z^N$ for the set of nonnegative Gelfand--Tsetlin patterns.
+
+\subsection{The fixed-time law}
+
+\begin{proposition}\label{prop:law}
+For $t>0$ the law of $\Lambda(t)$ is $\Pp(\Lambda(t)=\Lambda)=W_t(\Lambda)\1_{\mathcal G_n}(\Lambda)$ with $W_t$ as in \eqref{eq:W}.
+\end{proposition}
+
+\begin{proof}
+Work in the raw coordinates and write the top row in increasing order, $y=(y_1<\dots<y_n)$ with $y_j=z^n_j$; the initial top row is $a_i=i-n-1$. Let $V(y)=\prod_{i<j}(y_j-y_i)$, so that $V(a)=\prod_{j=1}^{n-1}j!$. Equation (2.101) of \cite{BF}, in the limit of equal rates, gives
+\begin{equation}\label{eq:top}
+\Pp(z^n(t)=y)=\frac{V(y)}{V(a)}\det\bigl[q_t(y_j-a_i)\bigr]_{i,j=1}^n,\qquad q_t(k)=e^{-t}\frac{t^k}{k!}\1_{k\ge0}.
+\end{equation}
+The confluent limit is routine: with rates $e^{\varepsilon\beta_i}$ the alternants in (2.101) have leading terms of order $\varepsilon^{n(n-1)/2}$, whose $\beta$- and $\varepsilon$-dependence cancels in the ratio, leaving $V(y)/V(a)$.
+
+Put $L_j=y_j+n\ge0$. Taking $e^{-t}t^{L_j}/L_j!$ out of column $j$ and $t^{-(i-1)}$ out of row $i$, the remaining entry is the falling factorial $L_j(L_j-1)\cdots(L_j-i+2)$, a monic polynomial of degree $i-1$ in $L_j$ that vanishes when $L_j<i-1$. A triangular change of basis to the monomials $L_j^{i-1}$ does not change the determinant, so
+\begin{equation}\label{eq:det}
+\det\bigl[q_t(y_j-a_i)\bigr]=e^{-nt}\,t^{\sum_jL_j-n(n-1)/2}\,\frac{V(L)}{\prod_jL_j!}.
+\end{equation}
+Given the top row, Proposition~2.22 of \cite{BF} says that the lower rows are distributed by the product of the interlacing links $\Lambda_n\Lambda_{n-1}\cdots\Lambda_2$; this applies because the initial array, being the unique packed array, has the required Gibbs form. With equal rates the link from an increasing row $u$ of length $m$ to a row $v$ of length $m-1$ is
+\[
+\Lambda_m(u,v)=(m-1)!\,\frac{V(v)}{V(u)}\,\1\{u_i<v_i\le u_{i+1},\ 1\le i<m\},
+\]
+the uniform Gelfand--Tsetlin link, which is the equal-rate limit of \cite[(2.94) and Lemma~2.13(ii)]{BF}. The product of the links over $m=n,\dots,2$ telescopes to $V(a)/V(y)$ times the indicator of \eqref{eq:zinter}. Multiplying by \eqref{eq:top} and \eqref{eq:det}, the factors $V(y)/V(a)$ and $V(a)/V(y)$ cancel. The reversal of $(L_1,\dots,L_n)$ is $(l_1,\dots,l_n)$ with $l_i=\lambda_i+n-i$, so $V(L)=\prod_{i<j}(l_i-l_j)$, and $\sum_jL_j-n(n-1)/2=|\lambda|$. This is \eqref{eq:W}.
+\end{proof}
+
+\begin{remark}\label{rem:schur}
+Since $\prod_{i<j}(l_i-l_j)/\prod_il_i!=s_\lambda(\mathrm{ex}_1)$ is the Schur function at the exponential specialization (equivalently $f^\lambda/|\lambda|!$, with $f^\lambda$ the number of standard Young tableaux), \eqref{eq:W} reads $W_t(\Lambda)=e^{-nt}s_\lambda(\mathrm{ex}_t)$, constant over the patterns with top row $\lambda$. There are $s_\lambda(1^n)$ such patterns, so the top row has the Poissonized Schur law $e^{-nt}s_\lambda(1^n)s_\lambda(\mathrm{ex}_t)$, and the Cauchy identity $\sum_\lambda s_\lambda(1^n)s_\lambda(\mathrm{ex}_t)=e^{nt}$ \cite{Mac} confirms that $W_t$ has total mass one. This is the Schur process of \cite{OR} with the specializations attached to the levels.
+\end{remark}
+
+\section{The midpoint inequality for the array}\label{sec:midpoint}
+
+For $A,B\in\Z^N$ write $R=\fl{(A+B)/2}$ and $S=\cl{(A+B)/2}$. Then $R+S=A+B$ and $S-R\in\{0,1\}^N$.
+
+\begin{lemma}\label{lem:support}
+If $A,B\in\mathcal G_n$ then $R,S\in\mathcal G_n$.
+\end{lemma}
+
+\begin{proof}
+Each condition defining $\mathcal G_n$ has the form $A_u\ge A_v$ or $A_u\ge0$, see \eqref{eq:GT}. If $A_u\ge A_v$ and $B_u\ge B_v$ then $A_u+B_u\ge A_v+B_v$, and floor and ceiling are monotone.
+\end{proof}
+
+\begin{lemma}\label{lem:fact}
+For nonnegative integers $a,b$ with $r=\fl{(a+b)/2}$ and $s=\cl{(a+b)/2}$, $r!\,s!\le a!\,b!$.
+\end{lemma}
+
+\begin{proof}
+Let $a\le b$ and $k=r-a=b-s\ge0$. Then $a!b!/(r!s!)=\prod_{j=1}^k(s+j)/(a+j)\ge1$ because $s\ge a$.
+\end{proof}
+
+\begin{lemma}\label{lem:diff}
+Let $a,b,r,s$ be integers with $r+s=a+b$ and $|r-s|\le1$. Then $ab\le rs$.
+\end{lemma}
+
+\begin{proof}
+$rs-ab=\frac14\bigl((a-b)^2-(r-s)^2\bigr)$. If $a+b$ is even then $r=s$. If it is odd then $a-b$ is odd, so $(a-b)^2\ge1=(r-s)^2$.
+\end{proof}
+
+\begin{proposition}\label{prop:array}
+Let $F=W_t\1_{\mathcal G_n}$ with $t>0$. For all $A,B\in\Z^N$,
+\[
+F(A)\,F(B)\le F(R)\,F(S).
+\]
+\end{proposition}
+
+\begin{proof}
+If $A$ or $B$ is not in $\mathcal G_n$ the left side is zero. Otherwise $R,S\in\mathcal G_n$ by Lemma~\ref{lem:support}, and we compare \eqref{eq:W} factor by factor, with $\alpha,\beta,\rho,\sigma$ the top rows of $A,B,R,S$. The factors $e^{-nt}$ agree, and so do the powers of $t$ since $|\rho|+|\sigma|=|\alpha|+|\beta|$. For each $i$, the integers $\alpha_i+n-i$ and $\beta_i+n-i$ are nonnegative, and since an integer shift commutes with rounding, Lemma~\ref{lem:fact} applied to them gives $(\rho_i+n-i)!(\sigma_i+n-i)!\le(\alpha_i+n-i)!(\beta_i+n-i)!$. For $i<j$ put
+\[
+a=\alpha_i-\alpha_j+j-i,\quad b=\beta_i-\beta_j+j-i,\quad r=\rho_i-\rho_j+j-i,\quad s=\sigma_i-\sigma_j+j-i.
+\]
+These are positive, $r+s=a+b$, and $r-s=(\rho_i-\sigma_i)-(\rho_j-\sigma_j)\in\{-1,0,1\}$. Lemma~\ref{lem:diff} gives $ab\le rs$. Multiplying the positive factors proves the claim.
+\end{proof}
+
+Proposition~\ref{prop:array} does not use subtraction of rounded quantities as if rounding were additive: the differences $\rho_i-\rho_j$ and $\sigma_i-\sigma_j$ can differ by one, and Lemma~\ref{lem:diff} is stated for exactly this situation.
+
+\section{Marginals and the proof of the theorem}\label{sec:proof}
+
+\begin{theorem}[{Halikias, Klartag and Slomka \cite[Theorem~1.2]{HKS}, case $\lambda=1/2$}]\label{thm:hks}
+If $f,g,h,k\colon\Z^r\to[0,\infty)$ satisfy $f(u)g(v)\le h(\fl{(u+v)/2})\,k(\cl{(u+v)/2})$ for all $u,v\in\Z^r$, then $\sum f\cdot\sum g\le\sum h\cdot\sum k$.
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main} and Corollary~\ref{cor:coord}]
+At $t=0$ the law is a point mass, and a nonzero left side in \eqref{eq:main} forces $a=b=(-1,\dots,-n)$. Let $t>0$ and let $F=W_t\1_{\mathcal G_n}$ as in Proposition~\ref{prop:array}, a probability mass function on $\Z^N$ by Proposition~\ref{prop:law}. Fix a set $J$ of coordinates of $\Z^N$ and write points as $(d,u)$ with $d\in\Z^J$ and $u$ the remaining coordinates; coordinate permutations commute with rounding. For $d,e\in\Z^J$ set
+\[
+f(u)=F(d,u),\quad g(u)=F(e,u),\quad h(u)=F\bigl(\fl{\tfrac{d+e}2},u\bigr),\quad k(u)=F\bigl(\cl{\tfrac{d+e}2},u\bigr).
+\]
+For all $u,v$, Proposition~\ref{prop:array} applied to $A=(d,u)$ and $B=(e,v)$ is exactly the hypothesis of Theorem~\ref{thm:hks}. All four functions are summable, and Theorem~\ref{thm:hks} gives
+\[
+\Pp(\Lambda_J=d)\,\Pp(\Lambda_J=e)\le\Pp\bigl(\Lambda_J=\fl{\tfrac{d+e}2}\bigr)\,\Pp\bigl(\Lambda_J=\cl{\tfrac{d+e}2}\bigr).
+\]
+(If one prefers a version of Theorem~\ref{thm:hks} for finitely supported functions, restrict all four functions to a box $[-M,M]^{N-|J|}$, which is closed under both rounded midpoints, and let $M\to\infty$ by monotone convergence.) For $J$ the diagonal $\{\lambda^m_m\}$ this is \eqref{eq:main} for $D$, and since $X=D-(1,\dots,n)$ is an integer translate and translation commutes with rounding, \eqref{eq:main} follows for $p_t$. For $J=\{\lambda^k_k:k\in K\}$ it is Corollary~\ref{cor:coord}; with $K=\{k\}$, $d=j-1$ and $e=j+1$ both rounded midpoints equal $j$.
+\end{proof}
+
+\begin{remark}
+The argument applies to every coordinate of the pattern. For instance each part $\lambda_i$ of the top row, whose law is the marginal of the Poissonized Schur measure $e^{-nt}s_\lambda(1^n)s_\lambda(\mathrm{ex}_t)$ of Remark~\ref{rem:schur}, has a log-concave distribution. This may be compared with the log-concavity of the first row under Poissonized Plancherel measure proved in \cite{BKM}, where the specializations are both exponential. What the proof cannot reach are functions of the pattern other than coordinate projections, such as the current through a bond, since Theorem~\ref{thm:hks} concerns sums over fibres of a coordinate projection.
+\end{remark}
+
+\section{Computations}\label{sec:numerics}
+
+The repository \cite{code} contains a program that checks the main steps and a Lean file. They are not part of the proof. The program \texttt{checks.py} verifies Proposition~\ref{prop:array} in exact rational arithmetic for every pair of patterns with top row bounded by a cap: $3{,}570$ pairs for $n=2$, $6{,}328$ for $n=3$ and $8{,}001$ for $n=4$. It compares the diagonal marginal of \eqref{eq:W} with the TASEP law obtained by uniformization of the generator, at $60$ significant digits, for $n=2$, $t=2$ (66 states) and $n=3$, $t=1/2$ (84 states); the largest relative difference is $2\cdot10^{-60}$. Finally it checks \eqref{eq:main} directly for all pairs of states with $D_1\le10$ ($n=2$) and $D_1\le6$ ($n=3$) at $t=1/2,1,2$; among the pairs whose rounded midpoints are not the pair itself, the smallest ratio of the right side to the left side is $1.0095$. The Lean file \texttt{Midpoint.lean} proves Lemma~\ref{lem:diff}, its consequence for rounded differences with an integer shift, and the preservation of shifted coordinate comparisons under both roundings, using Lean~4 and Mathlib.
+
+\section*{Acknowledgements and funding}
+The research presented in this paper was supported by the European Research
+Council (ERC) under the European Union's Horizon Europe research and
+innovation programme (grant agreement No.~101041711), by the Simons
+Foundation as part of the Collaboration on the Mathematical and Scientific
+Foundations of Deep Learning, by Heights Labs, by Convex Nexus Capital, by
+the Israel Science Foundation (grant number 2258/19), and by the Israel
+Science Foundation (ISF Grant 4101/25). Computational resources were
+provided in part by Google Cloud through its education credits program
+(credit 530550103).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and
+has a management role at Convex Nexus Capital. These entities are included
+in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics. In October 2026 OpenAI GPT models, running as research tasks of that project, proposed the proof of Theorem~\ref{thm:main}, including the explicit array law of Proposition~\ref{prop:law} and the factor-by-factor argument of Proposition~\ref{prop:array}, and wrote the Lean file. In November 2026 Claude Opus~5.5 (Anthropic), working in Claude Code, checked the proof, wrote the verification program and wrote the paper. The author directed the work and is responsible for the content of the paper and for decisions concerning its dissemination.
+
+\section*{Data availability}
+No data were used. The code is available at\\ \url{https://github.com/yspennstate/tasep-midpoint-log-concavity}.
+
+\begin{thebibliography}{10}
+
+\bibitem{AIM}
+L.~Petrov, A.~Saenz, E.~Sorensen and H.~T.~Vu, \emph{AIM workshop: All roads to KPZ universality. Open problems}, American Institute of Mathematics, March 19, 2025, Section~3. \url{https://lpetrov.cc/LaTeX/2025-03-19-AIM-KPZ/2025-03-19-AIM-KPZ.pdf}
+
+\bibitem{BKM}
+J.~Baslingker, M.~Krishnapur and M.~Madiman, Log-concavity in one-dimensional Coulomb gases and related ensembles, arXiv:2412.15116, 2024.
+
+\bibitem{BLS}
+M.~B\'ona, M.-L.~Lackner and B.~E.~Sagan, Longest increasing subsequences and log concavity, \emph{Ann. Comb.} \textbf{21} (2017), 535--549.
+
+\bibitem{BF}
+A.~Borodin and P.~L.~Ferrari, Anisotropic growth of random surfaces in $2+1$ dimensions, \emph{Comm. Math. Phys.} \textbf{325} (2014), 603--684. arXiv:0804.3035.
+
+\bibitem{HKS}
+D.~Halikias, B.~Klartag and B.~A.~Slomka, Discrete variants of Brunn--Minkowski type inequalities, \emph{Ann. Fac. Sci. Toulouse Math. (6)} \textbf{30} (2021), 267--279.
+
+\bibitem{HMMS}
+J.~Huh, J.~P.~Matherne, K.~M\'esz\'aros and A.~St.~Dizier, Logarithmic concavity of Schur and related polynomials, \emph{Trans. Amer. Math. Soc.} \textbf{375} (2022), 4411--4427.
+
+\bibitem{Mac}
+I.~G.~Macdonald, \emph{Symmetric Functions and Hall Polynomials}, 2nd ed., Oxford University Press, 1995.
+
+\bibitem{OR}
+A.~Okounkov and N.~Reshetikhin, Correlation function of Schur process with application to local geometry of a random 3-dimensional Young diagram, \emph{J. Amer. Math. Soc.} \textbf{16} (2003), 581--603.
+
+\bibitem{Sch}
+G.~M.~Sch\"utz, Exact solution of the master equation for the asymmetric exclusion process, \emph{J. Stat. Phys.} \textbf{88} (1997), 427--445.
+
+\bibitem{code}
+Y.~Shmalo, Code and Lean file for this paper, \url{https://github.com/yspennstate/tasep-midpoint-log-concavity}, 2026.
+
+\end{thebibliography}
+\end{document}

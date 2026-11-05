@@ -1,0 +1,11 @@
+1. n=2 top cap 6: 84 arrays, 3570 pairs, inequality holds exactly
+1. n=3 top cap 3: 112 arrays, 6328 pairs, inequality holds exactly
+1. n=4 top cap 2: 126 arrays, 8001 pairs, inequality holds exactly
+2. n=2 t=2: 66 states, array marginal vs generator, max relative difference 3.78e-61
+2. n=3 t=0.5: 84 states, array marginal vs generator, max relative difference 2.01e-60
+3. n=2 t=0.5: 66 states, 1980 nontrivial pairs, smallest ratio 1.0099684
+3. n=2 t=1: 66 states, 1980 nontrivial pairs, smallest ratio 1.0098252
+3. n=2 t=2: 66 states, 1980 nontrivial pairs, smallest ratio 1.0095035
+3. n=3 t=0.5: 84 states, 3115 nontrivial pairs, smallest ratio 1.0190465
+3. n=3 t=1: 84 states, 3115 nontrivial pairs, smallest ratio 1.0173383
+3. n=3 t=2: 84 states, 3115 nontrivial pairs, smallest ratio 1.0116444
